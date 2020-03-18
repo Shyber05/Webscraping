@@ -27,7 +27,7 @@ table_rows = table_body.findAll('tr')
 
 countries = []
 total_cases = []
-cases_todays = []
+new_cases = []
 deaths = []
 total_recovered = []
 
@@ -36,12 +36,13 @@ for tr in table_rows:
     td = tr.findAll('td')
     countries.append(td[0].text)
     total_cases.append(td[1].text)
-    cases_todays.append(td[2].text)
+    new_cases.append(td[2].text)
     deaths.append(td[3].text)
     total_recovered.append(td[5].text)
 
 # Create a pandas database that will allow easy readability
 indicies = [i for i in range(1,len(countries)+1)]
-headers = ['Countries', 'Total Cases', 'Today\'s Cases', 'Deaths', 'Total Recovered']
-df = pd.DataFrame(list(zip(countries,total_cases,cases_todays,deaths,total_recovered)),columns=headers,index=indicies)
+headers = ['Countries', 'Total Cases', 'New Cases', 'Deaths', 'Total Recovered']
+df = pd.DataFrame(list(zip(countries,total_cases,new_cases,deaths,total_recovered)),columns=headers,index=indicies)
+pd.set_option('display.max_rows', None)
 print(f'Current status:\n{df}')
